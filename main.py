@@ -66,3 +66,59 @@ lista_clientes = session.query(Cliente).all()
 
 for cliente in lista_clientes:
     print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+
+# U - update - UPDATE - Atualizar
+print("\nAtualizando dados do usuário.")
+email_cliente = input("Digite o email do clienete que será atualizado: ")
+
+cliente = session.query(Cliente).filter_by(email = email_cliente).first()
+
+if cliente:
+    cliente.nome = input("Digite seu nome: ")
+    cliente.email = input("Digite seu email: ")
+    cliente.senha = input("Digite seu senha: ")
+
+    session.commit()
+
+else:
+    print("Cliente não encontrado")
+
+# R - Read - SELECT - consulta
+print("Exibindo dados de todos os clientes")
+lista_clientes = session.query(Cliente).all()
+
+for cliente in lista_clientes:
+    print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+
+# D - Delete - DELETE - Excluir
+print("\nExcluindo os dados de um cliente")
+email_cliente = input("Digite o email do clienete que será excluido: ")
+cliente = session.query(Cliente).filter_by(email = email_cliente).first()
+
+if cliente:
+    session.delete(cliente)
+    session.commit()
+    print(f"Cliente {cliente.nome} excluido com sucesso!")
+else:
+    print("Cliente não encontrado")
+
+# R - Read - SELECT - consulta
+print("Exibindo dados de todos os clientes")
+lista_clientes = session.query(Cliente).all()
+
+for cliente in lista_clientes:
+    print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+
+# R - Read - SELECT - consulta
+print("Consultando os dados de apenas um clientes")
+email_cliente = input("Digite o email do clienete: ")
+
+cliente = session.query(Cliente).filter_by(email = email_cliente).first()
+
+if cliente:
+    print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+else:
+    print("cLiente não encontrado")
+
+# Fechando conexão.
+session.close()
